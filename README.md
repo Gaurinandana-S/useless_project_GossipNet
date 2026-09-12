@@ -2,50 +2,286 @@
 
 
 
-# [Project Name] 🎯
+# GossipNe 🎯
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: Solastice
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: Gaurinandana S - RIT Kottayam
 
 ### Project Description
-[2-3 lines about what your project does]
+GossipNet is an interactive deduction game that models family gossip as a social graph. Players investigate a dynamically expanding family network through a chatbot, uncover relationships and behavioral clues, and attempt to identify the person responsible for starting a fictional rumor.
+
+Behind the ridiculous premise is a legitimate graph-based system involving relationship modeling, graph traversal, dynamic graph generation, information propagation, and progressive investigation.
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+Every family has important unanswered questions:
+
+Who started the rumor?
+Who told whom?
+Why does everyone know except you?
+How did a completely harmless piece of information reach three different households in 20 minutes?
+And most importantly... who started it?
+
+Traditional software has completely failed to solve this extremely serious problem.
+
+There is therefore an urgent need for a sophisticated system capable of investigating family gossip networks.
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+GossipNet turns family gossip into a graph investigation game.
+
+The player investigates family members through a conversational chatbot while exploring a dynamically expanding family/social graph.
+
+Players can ask about:
+
+Generation
+Age
+Family relationships
+Households
+Previous rumors
+Gossip reputation
+Trust
+Suspicious relationships
+Social connections
+Information flow
+
+The graph progressively expands as the player makes guesses, revealing deeper levels of the family and introducing new suspects.
+
+And when the player finally gets the answer:
+
+"You were right. Unfortunately, you're wrong."
+
+Because apparently even being correct isn't allowed to be satisfying.
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+-Languages Used
 
-For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
+Python
+TypeScript
+JavaScript
+SQL
+HTML
+CSS
+
+Frameworks
+
+Next.js
+React
+FastAPI
+
+Libraries
+
+React Flow
+NetworkX
+Pydantic
+SQLAlchemy
+PostgreSQL client libraries
+Tailwind CSS
+
+Tools
+
+Git
+GitHub
+Visual Studio Code
+Docker / Docker Compose
+Postman / API testing tools
+For Hardware
+
+No specialized hardware is required.
+
+GossipNet is a software-only application and can run on a standard laptop or desktop computer.
 
 ### Implementation
 For Software:
 # Installation
-[commands]
+GossipNet is implemented using a client-server architecture.
 
-# Run
-[commands]
+Frontend
+
+The frontend is built using Next.js, React and TypeScript.
+
+The main interface consists of:
+
+Interactive family/social graph
+Chat-based interrogation panel
+Rumor information panel
+Investigation controls
+Guess system
+Floating "Give Up, Bro" button
+Score and game statistics
+Result screen
+
+The graph is rendered using React Flow, allowing users to:
+
+Pan
+Zoom
+Select people
+Navigate large graphs
+View relationship edges
+Observe newly revealed family members
+Backend
+
+The backend uses FastAPI and Python.
+
+It manages:
+
+Game state
+Family graph generation
+Relationship calculations
+Rumor generation
+Investigation questions
+Graph revelation
+Guess validation
+Scoring
+Game progression
+Graph Engine
+
+NetworkX is used to represent the family/social network.
+
+The graph contains:
+
+People as nodes
+Family relationships as edges
+Social relationships as edges
+Multiple households
+Multiple generations
+Friends
+Neighbors
+Colleagues
+In-laws
+
+The backend maintains the complete graph while exposing only the appropriate portion to the player.
+
+Dynamic Investigation
+
+The player initially sees only a small section of the graph.
+
+The player can interrogate revealed people through the chatbot.
+
+Questions produce useful clues and allow the player to make deductions.
+
+When a player makes an incorrect guess, the family graph expands downward, revealing another level of the family.
+
+This creates a progressive investigation experience:
+
+Investigate
+     ↓
+Gather clues
+     ↓
+Guess
+     ↓
+Wrong
+     ↓
+Family tree expands
+     ↓
+New people appear
+     ↓
+Investigate again
+     ↓
+Guess again
+Guess System
+
+Players can make an unlimited number of guesses.
+
+After the first guess, the Give Up, Bro button becomes available.
+
+The button remains visible as a floating action until the player presses it.
+
+A wrong guess:
+
+Does not end the game
+Produces a humorous response
+Expands the family tree
+Allows the player to continue investigating
+
+A correct guess ends the round but displays an intentionally confusing result message.
+
+Example
+You were right.
+
+Unfortunately, you're wrong.
+
+We're investigating.
+New Round Generation
+
+Every new round generates a completely new:
+
+Family graph
+People
+Households
+Relationships
+Social connections
+Rumor
+Rumor subject
+Rumor starter
+
+The graph is generated using deterministic random seeds so that game states can be reproduced for testing.
+
+Installation
+
+Clone the repository:
+
+git clone https://github.com/Gaurinandana-S/useless_project_GossipNet.git
+cd useless_project_GossipNet
+
+Install frontend dependencies:
+
+cd frontend
+npm install
+
+Install backend dependencies:
+
+cd ../backend
+pip install -r requirements.txt
+
+Configure environment variables using:
+
+.env.example
+
+Create the PostgreSQL database and configure the database connection.
+
+If Docker is configured for the project:
+
+docker-compose up -d
+Run
+Start Backend
+
+From the backend directory:
+
+uvicorn app.main:app --reload
+
+The FastAPI server will run locally.
+
+Start Frontend
+
+From the frontend directory:
+
+npm run dev
+
+Open the local development URL shown by Next.js in the terminal.
 
 ### Project Documentation
 For Software:
+The project documentation covers:
+
+System architecture
+Family/social graph model
+Graph generation
+Relationship engine
+Dynamic graph revelation
+Chatbot investigation system
+Rumor generation
+Guess mechanics
+Scoring
+API architecture
+Database structure
+Testing
+Future expansion
 
 # Screenshots (Add at least 3)
 ![Screenshot1](Add screenshot 1 here with proper name)
@@ -61,37 +297,10 @@ For Software:
 ![Workflow](Add your workflow/architecture diagram here)
 *Add caption explaining your workflow*
 
-For Hardware:
-
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
-
 ### Project Demo
 # Video
 [Add your demo video link here]
 *Explain what the video demonstrates*
-
-# Additional Demos
-[Add any extra demo materials/links]
-
-## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
