@@ -259,72 +259,238 @@ The graph is generated using **deterministic random seeds** so that game states 
 
 ---
 
-# Installation
+# Installation & Local Setup
 
-GossipNet is implemented using a **client-server architecture**.
+GossipNet uses a **client-server architecture** consisting of a Next.js frontend, FastAPI backend, and PostgreSQL database.
 
-## Clone the Repository
+## Prerequisites
+
+Make sure the following are installed:
+
+* **Git**
+* **Node.js and npm**
+* **Python 3.x**
+* **PostgreSQL**
+* **Docker / Docker Compose** *(if using the provided Docker configuration)*
+
+---
+
+## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Gaurinandana-S/useless_project_GossipNet.git
 cd useless_project_GossipNet
 ```
 
-## Install Frontend Dependencies
+---
 
-```bash
-cd frontend
-npm install
-```
+## 2. Start the Database
 
-## Install Backend Dependencies
-
-```bash
-cd ../backend
-pip install -r requirements.txt
-```
-
-## Configure Environment Variables
-
-Configure the environment variables using:
-
-```text
-.env.example
-```
-
-Create the **PostgreSQL database** and configure the database connection.
-
-If Docker is configured for the project:
+If the project is configured with Docker Compose, start the required services using:
 
 ```bash
 docker-compose up -d
 ```
 
+Check the running containers:
+
+```bash
+docker-compose ps
+```
+
+Make sure the PostgreSQL service is running before starting the backend.
+
 ---
 
-# Run
+## 3. Configure the Backend
 
-## Start Backend
+Navigate to the backend directory:
 
-From the backend directory:
+```bash
+cd backend
+```
+
+Create a Python virtual environment:
+
+### Windows
+
+```powershell
+python -m venv venv
+```
+
+Activate the virtual environment:
+
+```powershell
+venv\Scripts\activate
+```
+
+Install the required Python packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+Configure the required environment variables using the project's `.env.example` file.
+
+Make sure the PostgreSQL database connection details are correctly configured.
+
+---
+
+## 4. Start the Backend
+
+From the `backend` directory, run:
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-The **FastAPI server** will run locally.
+The FastAPI backend will start at:
 
-## Start Frontend
+**http://127.0.0.1:8000**
 
-From the frontend directory:
+FastAPI's interactive API documentation is available at:
+
+**http://127.0.0.1:8000/docs**
+
+---
+
+## 5. Start the Frontend
+
+Open a **new terminal window** and navigate to the frontend:
+
+```bash
+cd frontend
+```
+
+Install the Node.js dependencies:
+
+```bash
+npm install
+```
+
+Start the Next.js development server:
 
 ```bash
 npm run dev
 ```
 
-Open the **local development URL** shown by Next.js in the terminal.
+The frontend will be available at:
+
+**http://localhost:3000**
+
+Open this URL in your browser to start playing GossipNet.
 
 ---
+
+## Running the Complete Application
+
+GossipNet requires the following components to be running:
+
+```text
+                 ┌──────────────────────┐
+                 │      User Browser     │
+                 │   http://localhost:3000
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │   Next.js Frontend   │
+                 │   React + TypeScript │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │    FastAPI Backend   │
+                 │   http://127.0.0.1:8000
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │     PostgreSQL       │
+                 │       Database       │
+                 └──────────────────────┘
+```
+
+### Terminal 1 — Database
+
+```bash
+docker-compose up -d
+```
+
+### Terminal 2 — Backend
+
+```bash
+cd backend
+venv\Scripts\activate
+uvicorn app.main:app --reload
+```
+
+### Terminal 3 — Frontend
+
+```bash
+cd frontend
+npm run dev
+```
+
+Then open:
+
+**http://localhost:3000**
+
+---
+
+## Troubleshooting
+
+### Backend does not start
+
+Make sure the virtual environment is activated and dependencies are installed:
+
+```powershell
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+Then run:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+### Frontend dependencies are missing
+
+From the `frontend` directory:
+
+```bash
+npm install
+```
+
+Then:
+
+```bash
+npm run dev
+```
+
+### PostgreSQL connection error
+
+Make sure the database service is running:
+
+```bash
+docker-compose ps
+```
+
+Also verify the database credentials and connection URL in the backend environment configuration.
+
+### Port already in use
+
+If port `3000` is already being used, Next.js will automatically offer another available port.
+
+If port `8000` is already being used, start FastAPI on another port:
+
+```bash
+uvicorn app.main:app --reload --port 8001
+```
+
+Make sure the frontend is configured to communicate with the updated backend URL.
+
 
 # Project Documentation
 
