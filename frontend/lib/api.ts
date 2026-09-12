@@ -1,6 +1,6 @@
 import { GameState, QuestionResponse, GuessResponse, GiveUpResponse } from '@/types/game';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 async function safeFetch(url: string, init?: RequestInit): Promise<Response> {
   try {
