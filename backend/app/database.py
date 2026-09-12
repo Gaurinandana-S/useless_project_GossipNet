@@ -2,7 +2,9 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./gossipnet.db")
+# On Vercel (serverless read-only filesystem), write SQLite DB to /tmp
+default_db = "/tmp/gossipnet.db" if os.getenv("VERCEL") else "./gossipnet.db"
+DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{default_db}")
 
 # Add connect_args for SQLite
 engine_kwargs = {}
